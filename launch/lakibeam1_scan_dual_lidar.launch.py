@@ -72,7 +72,8 @@ def generate_launch_description():
     laser_enable = LaunchConfiguration('laser_enable')
     scan_range_start = LaunchConfiguration('scan_range_start')
     scan_range_stop = LaunchConfiguration('scan_range_stop')
-    sensorip = LaunchConfiguration('sensorip')
+    sensorip0 = LaunchConfiguration('sensorip0')
+    sensorip1 = LaunchConfiguration('sensorip1')
 
 
     # frame_id = LaunchConfiguration('frame_id', default='laser')
@@ -103,7 +104,7 @@ def generate_launch_description():
     )
     declare_hostip_cmd = DeclareLaunchArgument(
     'hostip',
-    default_value='0.0.0.0',
+    default_value='192.168.30.1',
     )
     declare_port0_cmd = DeclareLaunchArgument(
     'port0',
@@ -137,9 +138,13 @@ def generate_launch_description():
     'scan_range_stop',
     default_value='"315"',
     )
-    declare_sensorip_cmd = DeclareLaunchArgument(
-    'sensorip',
-    default_value='192.168.198.2',
+    declare_sensorip0_cmd = DeclareLaunchArgument(
+    'sensorip0',
+    default_value='192.168.30.10',
+    )
+    declare_sensorip1_cmd = DeclareLaunchArgument(
+    'sensorip1',
+    default_value='192.168.30.11',
     )
 
     richbeam_lidar_node0 = Node(
@@ -151,6 +156,7 @@ def generate_launch_description():
             'output_topic':output_topic0,
             'inverted':inverted,
             'hostip':hostip,
+            'sensorip':sensorip0,
             'port':port0,
             'angle_offset':angle_offset
         }],
@@ -165,6 +171,7 @@ def generate_launch_description():
             'output_topic':output_topic1,
             'inverted':inverted,
             'hostip':hostip,
+            'sensorip':sensorip1,
             'port':port1,
             'angle_offset':angle_offset
         }],
@@ -195,7 +202,8 @@ def generate_launch_description():
     ld.add_action(declare_laser_enable_cmd)
     ld.add_action(declare_scan_range_start_cmd)
     ld.add_action(declare_scan_range_stop_cmd)
-    ld.add_action(declare_sensorip_cmd)
+    ld.add_action(declare_sensorip0_cmd)
+    ld.add_action(declare_sensorip1_cmd)
     ld.add_action(richbeam_lidar_node0)
     ld.add_action(richbeam_lidar_node1)
     # ld.add_action(rviz_node)
